@@ -104,7 +104,10 @@ const fetchStacks = async () => {
       return acc;
     }, {});
 
-    return allCategories;
+    return {
+      stacksCategories: stacksCategories,
+      allCategories,
+    };
   }
 };
 
@@ -116,6 +119,8 @@ export default function RadarStacksDisplay({
   width: number;
   height: number;
 }) {
+  const [currentStack, setCurrentStack] = useState<string>();
+  const [stacksCategories, setStacksCategories] = useState<string[]>();
   const [stacksByCategory, setStacksByCategory] = useState<Stack[]>();
   const [loading, setLoading] = useState(true);
 
@@ -125,7 +130,11 @@ export default function RadarStacksDisplay({
         setLoading(true);
         const stacks = await fetchStacks();
 
-        setStacksByCategory(stacks);
+        if (stacks) {
+          setStacksByCategory(stacks.allCategories);
+          setStacksCategories(stacks.stacksCategories);
+          setCurrentStack(stacks.stacksCategories[0]);
+        }
       } catch (error) {
         console.error("Error fetching stacks:", error);
       } finally {
@@ -140,21 +149,36 @@ export default function RadarStacksDisplay({
     return <div>Loading...</div>;
   }
 
+  console.log(stacksByCategory[currentStack]);
+
   return (
-    <div className="grid grid-cols-2 gap-4">
-      {Object.entries(stacksByCategory).map(([category, skills]) => (
-        <div key={category} className="flex flex-col items-center">
-          <h3 className="text-lg font-bold mb-2">{category}</h3>
-          <RadarStack
-            width={width}
-            height={height}
-            data={skills.map((skill) => ({
-              name: skill.name,
-              value: (skill.progress / skill.total) * 100,
-            }))}
-          />
-        </div>
-      ))}
-    </div>
+    <>
+      <div className="flex justify-center items-center">
+        {stacksCategories?.map((category) => (
+          <h3
+            key={category}
+            className="text-lg font-bold mb-2"
+            onClick={() => setCurrentStack(category)}
+          >
+            {category}
+          </h3>
+        ))}
+      </div>
+
+      <div className="flex justify-center items-center">
+        {currentStack?.length && (
+          <div key={currentStack}>
+            <RadarStack
+              width={width}
+              height={height}
+              data={stacksByCategory[currentStack].map((skill) => ({
+                name: skill.name,
+                value: (skill.progress / skill.total) * 100,
+              }))}
+            />
+          </div>
+        )}
+      </div>
+    </>
   );
 }
