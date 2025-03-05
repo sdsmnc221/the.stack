@@ -23,10 +23,8 @@ export const fetchStacks = async () => {
       `v1/databases/${import.meta.env.VITE_NOTION_DATABASE_STACK}/query`
     ).data;
   } else {
-    data = await axiosInstance.post("api/notion");
+    data = (await axiosInstance.post("api/notion")).data.data;
   }
-
-  console.log(data);
 
   const { results: pages } = data;
 
