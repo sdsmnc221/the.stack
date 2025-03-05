@@ -2,6 +2,7 @@
 import { VercelRequest, VercelResponse } from "@vercel/node";
 import fetch from "node-fetch";
 import dotenv from "dotenv";
+import axios from "axios";
 
 // Load environment variables
 dotenv.config();
@@ -24,8 +25,7 @@ export default async function handler(
     const endpoint = `v1/databases/${"1858e033563181648b1dd198fda66c3d"}/query`;
 
     // Make a request to the Notion API
-    const fetchResponse = await fetch(`${notionApiBaseUrl}/${endpoint}`, {
-      method: "POST",
+    const fetchResponse = await axios.post(`${notionApiBaseUrl}/${endpoint}`, {
       headers: {
         "Content-Type": "application/json",
         // Authorization: atob(request.headers.authorization),
