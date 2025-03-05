@@ -5,7 +5,7 @@ import dotenv from "dotenv";
 // Load environment variables
 dotenv.config();
 
-module.exports = async function handler(request, response) {
+export default async function handler(request, response) {
   try {
     // Construct the Notion API endpoint using the query parameter
     const notionApiBaseUrl = "https://api.notion.com";
@@ -33,4 +33,4 @@ module.exports = async function handler(request, response) {
     console.error("Error:", error);
     return response.status(502).json({ error: "Bad Gateway" });
   }
-};
+}
