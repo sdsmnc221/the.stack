@@ -1,9 +1,7 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: import.meta.env.DEV
-    ? import.meta.env.VITE_BASE_URL
-    : "/api" + import.meta.env.VITE_BASE_URL_VERCEL,
+  baseURL: import.meta.env.DEV ? import.meta.env.VITE_BASE_URL : "",
   headers: {
     Authorization: import.meta.env.DEV
       ? `Bearer ${import.meta.env.VITE_NOTION_API_KEY}`
