@@ -1,10 +1,10 @@
-import React from "react";
+// import React from "react";
 import Lottie from "lottie-react";
 
 import "./App.scss";
 
 import ParentSize from "@visx/responsive/lib/components/ParentSize";
-import RadarStacksDisplay from "./RadarStacksDisplay";
+// import RadarStacksDisplay from "./RadarStacksDisplay";
 
 import SunflowerLottie from "../public/wired-outline-1832-sunflower-hover-pinch.json";
 import WordCloud from "./components/WordCloud";

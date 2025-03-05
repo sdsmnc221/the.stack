@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from "react";
+// @ts-nocheck
+
+import { useState, useEffect } from "react";
 import RadarStack from "./RadarStack";
 import axiosInstance from "./axiosInstance";
 
@@ -50,7 +52,7 @@ export const fetchStacks = async () => {
 
     const stacksSkills: StackSkill[] = pages.reduce(
       (acc: StackSkill[], page: any) => {
-        let currentSkill: any = {};
+        const currentSkill = {};
 
         if (page?.properties["Is Legacy Skill"].checkbox) {
           return acc;

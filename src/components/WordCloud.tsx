@@ -1,15 +1,12 @@
-import React, { useState, useEffect, useCallback } from "react";
+// @ts-nocheck
+import { useState, useEffect } from "react";
 import { Text } from "@visx/text";
 import { scaleLog } from "@visx/scale";
 import Wordcloud from "@visx/wordcloud/lib/Wordcloud";
 
-import {
-  fetchStacks,
-  type Stack,
-  type StackSkill,
-} from "../RadarStacksDisplay";
+import { fetchStacks } from "../RadarStacksDisplay";
 
-interface ExampleProps {
+interface WordCloudProps {
   width: number;
   height: number;
 }
@@ -45,9 +42,9 @@ const fixedValueGenerator = () => 0.64;
 
 type SpiralType = "archimedean" | "rectangular";
 
-export default function Example({ width, height }: ExampleProps) {
-  const [spiralType, setSpiralType] = useState<SpiralType>("rectangular");
-  const [withRotation, setWithRotation] = useState(false);
+export default function WordCloud({ width, height }: WordCloudProps) {
+  const spiralType = "rectangular";
+  const withRotation = false;
 
   const [loading, setLoading] = useState(true);
   const [words, setWords] = useState([]);
@@ -57,8 +54,8 @@ export default function Example({ width, height }: ExampleProps) {
 
     const scale = scaleLog({
       domain: [
-        Math.max(1, Math.min(...words.map((w) => w.value))),
-        Math.max(...words.map((w) => w.value)),
+        Math.max(1, Math.min(...words.map((w: any) => w.value))),
+        Math.max(...words.map((w: any) => w.value)),
       ],
       range: [10, 72],
     });
@@ -82,8 +79,6 @@ export default function Example({ width, height }: ExampleProps) {
               skill.progress = 10;
             }
 
-            console.log(skill);
-
             if (skill.category === "Langue") {
               skill.progress = (skill.progress / skill.total) * 100;
             }
@@ -104,7 +99,6 @@ export default function Example({ width, height }: ExampleProps) {
         console.error("Error fetching stacks:", error);
       } finally {
         setLoading(false);
-        console.log(words);
       }
     };
 
@@ -113,13 +107,13 @@ export default function Example({ width, height }: ExampleProps) {
 
   return (
     <div className="wordcloud">
-      {
+      {!loading && (
         <Wordcloud
           words={words}
           width={width}
           height={height}
           fontSize={fontSizeSetter}
-          font={"Noto Sans"}
+          font={"Varela Round"}
           padding={2}
           spiral={spiralType}
           rotate={withRotation ? getRotationDegree : 0}
@@ -140,7 +134,7 @@ export default function Example({ width, height }: ExampleProps) {
             ))
           }
         </Wordcloud>
-      }
+      )}
     </div>
   );
 }
