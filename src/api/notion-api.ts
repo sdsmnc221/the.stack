@@ -21,7 +21,7 @@ export default async function handler(
 
     // Construct the Notion API endpoint using the query parameter
     const notionApiBaseUrl = "https://api.notion.com";
-    const endpoint = `${query}`;
+    const endpoint = `/${query}`;
 
     // Make a request to the Notion API
     const fetchResponse = await fetch(`${notionApiBaseUrl}${endpoint}`, {
