@@ -25,11 +25,15 @@ export const fetchStacks = async () => {
   //   database_id: import.meta.env.VITE_NOTION_DATABASE_STACK,
   // });
 
-  const { data } = await axiosInstance.post(
-    `${import.meta.env.DEV ? "" : "?query="}v1/databases/${
-      import.meta.env.VITE_NOTION_DATABASE_STACK
-    }/query`
-  );
+  const { data } = import.meta.env.DEV
+    ? await axiosInstance.post(
+        `v1/databases/${import.meta.env.VITE_NOTION_DATABASE_STACK}/query`
+      )
+    : axios.post(
+        `/api/notion/v1/databases/${
+          import.meta.env.VITE_NOTION_DATABASE_STACK
+        }/query`
+      );
 
   const { results: pages } = data;
 
