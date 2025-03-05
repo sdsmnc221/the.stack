@@ -5,7 +5,7 @@ const axiosInstance = axios.create({
   headers: {
     Authorization: import.meta.env.DEV
       ? `Bearer ${import.meta.env.VITE_NOTION_API_KEY}`
-      : btoa(`Bearer ${import.meta.env.VITE_NOTION_API_KEY}`),
+      : `Bearer ${import.meta.env.VITE_NOTION_API_KEY}`,
     "Notion-Version": "2022-06-28",
     "Content-Type": "application/json",
     "Access-Control-Allow-Origin": "*",
