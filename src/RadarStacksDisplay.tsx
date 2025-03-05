@@ -26,11 +26,18 @@ export const fetchStacks = async () => {
   //   database_id: import.meta.env.VITE_NOTION_DATABASE_STACK,
   // });
 
+  const notionApiBaseUrl = "https://api.notion.com";
+  const endpoint = `v1/databases/${process.env.VITE_NOTION_DATABASE_STACK}/query`;
+
   const { data } = import.meta.env.DEV
     ? await axiosInstance.post(
         `v1/databases/${import.meta.env.VITE_NOTION_DATABASE_STACK}/query`
       )
-    : axios.get(`/api/notion`);
+    : axios.get(`${notionApiBaseUrl}/${endpoint}`, {
+        headers: {
+          Authorization: `Bearer ${import.meta.env.VITE_NOTION_API_KEY}`,
+        },
+      });
 
   const { results: pages } = data;
 
