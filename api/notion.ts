@@ -17,7 +17,7 @@ export default async function handler(
     const endpoint = `v1/databases/${process.env.VITE_NOTION_DATABASE_STACK}/query`;
 
     // Make a request to the Notion API
-    const fetchResponse = await axios.get(`${notionApiBaseUrl}/${endpoint}`, {
+    const fetchResponse = await axios.post(`${notionApiBaseUrl}/${endpoint}`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${process.env.VITE_NOTION_API_KEY}`,
