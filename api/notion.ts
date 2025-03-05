@@ -12,14 +12,6 @@ export default async function handler(
   response: VercelResponse
 ) {
   try {
-    // Extract the query parameter 'query' from the request URL
-    const query = request.query.query;
-
-    // Ensure the 'query' parameter is provided
-    if (!query) {
-      return response.status(400).json({ error: "Query parameter is missing" });
-    }
-
     // Construct the Notion API endpoint using the query parameter
     const notionApiBaseUrl = "https://api.notion.com";
     const endpoint = `v1/databases/${process.env.VITE_NOTION_DATABASE_STACK}/query`;
