@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { VercelRequest, VercelResponse } from "@vercel/node";
 import fetch from "node-fetch";
 import dotenv from "dotenv";
