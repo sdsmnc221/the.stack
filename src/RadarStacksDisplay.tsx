@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import RadarStack from "./RadarStack";
 import axiosInstance from "./axiosInstance";
+import axios from "axios";
 
 export type StackSkill = {
   category: string;
