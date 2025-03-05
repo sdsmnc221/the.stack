@@ -25,10 +25,9 @@ export default async function handler(request, response) {
     const data = await fetchResponse.json(); // Fixed: use .json() method to parse response
 
     // Return the data in the response
-    return {
-      statusCode: 200,
-      body: JSON.stringify(data),
-    };
+    return response.status(200).json({
+      data,
+    });
   } catch (error) {
     console.error("Error:", error);
     return response.status(502).json({ error: "Bad Gateway" });
