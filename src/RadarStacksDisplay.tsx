@@ -1,10 +1,8 @@
 // @ts-nocheck
 
 import { useState, useEffect } from "react";
-// import { Client } from "@notionhq/client";
 import RadarStack from "./RadarStack";
 import axiosInstance from "./axiosInstance";
-import axios from "axios";
 
 export type StackSkill = {
   category: string;
@@ -27,13 +25,11 @@ export const fetchStacks = async () => {
   //   database_id: import.meta.env.VITE_NOTION_DATABASE_STACK,
   // });
 
-  // console.log(notion);
-
-  const { data } = import.meta.env.DEV
-    ? await axiosInstance.post(
-        `v1/databases/${import.meta.env.VITE_NOTION_DATABASE_STACK}/query`
-      )
-    : axios.post(`/api/notion`);
+  const { data } = await axiosInstance.post(
+    import.meta.env.DEV
+      ? `v1/databases/${import.meta.env.VITE_NOTION_DATABASE_STACK}/query`
+      : "api/"
+  );
 
   const { results: pages } = data;
 

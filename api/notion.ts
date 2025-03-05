@@ -2,7 +2,6 @@
 import { VercelRequest, VercelResponse } from "@vercel/node";
 import fetch from "node-fetch";
 import dotenv from "dotenv";
-import axios from "axios";
 
 // Load environment variables
 dotenv.config();
@@ -17,12 +16,19 @@ export default async function handler(
     const endpoint = `v1/databases/${process.env.VITE_NOTION_DATABASE_STACK}/query`;
 
     // Make a request to the Notion API
-    const fetchResponse = await axios.post(`${notionApiBaseUrl}/${endpoint}`, {
+    const fetchResponse = await fetch(`${notionApiBaseUrl}/${endpoint}`, {
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${process.env.VITE_NOTION_API_KEY}`,
+        Authorization: atob(request.headers.authorization),
         "Notion-Version": "2022-06-28",
+        "Access-Control-Allow-Credentials": "true",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET,OPTIONS,PATCH,DELETE,POST,PUT",
+        "Access-Control-Allow-Headers":
+          "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
       },
+      body: JSON.stringify(request.body),
     });
 
     const data = await fetchResponse();
