@@ -21,7 +21,7 @@ export default async function handler(
 
     // Construct the Notion API endpoint using the query parameter
     const notionApiBaseUrl = "https://api.notion.com";
-    const endpoint = `v1/databases/${process.env.VITE_NOTION_DATABASE_STACK}/query`;
+    const endpoint = `v1/databases/${"1858e033563181648b1dd198fda66c3d"}/query`;
 
     // Make a request to the Notion API
     const fetchResponse = await fetch(`${notionApiBaseUrl}/${endpoint}`, {
