@@ -38,7 +38,7 @@ function getRotationDegree() {
   return rand * degree;
 }
 
-const fixedValueGenerator = () => 0.64;
+const fixedValueGenerator = () => 0.5;
 
 type SpiralType = "archimedean" | "rectangular";
 
@@ -60,7 +60,7 @@ export default function WordCloud({ width, height }: WordCloudProps) {
       range: [10, 72],
     });
 
-    return scale(value);
+    return scale(value) * width < height ? 0.5 : 1;
   };
 
   const fontSizeSetter = (datum: WordData) => fontScale(datum.value);

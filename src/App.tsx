@@ -19,7 +19,10 @@ export default function App() {
             height={height / 10}
             className="flower"
           ></Lottie>
-          <WordCloud width={width} height={height} />
+          <WordCloud
+            width={height > width ? width * 2 : width}
+            height={height}
+          />
         </>
       )}
     </ParentSize>

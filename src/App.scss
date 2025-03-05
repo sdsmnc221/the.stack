@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Varela+Round&display=swap");
 
 .app {
+  width: 100vw !important;
   height: 90dvh !important;
   overflow: visible;
   position: fixed;
@@ -27,17 +28,11 @@
   transform: scale(0.48);
   transform-origin: bottom;
 }
-.wordcloud svg {
-  margin: 1rem 0;
-  cursor: pointer;
-}
 
-.wordcloud label {
-  display: inline-flex;
-  align-items: center;
-  font-size: 14px;
-  margin-right: 8px;
-}
-.wordcloud textarea {
-  min-height: 100px;
+@media screen and (max-width: 480px) {
+  .wordcloud {
+    svg {
+      transform: translateX(-100vw) translateY(-16vh);
+    }
+  }
 }

@@ -18,9 +18,11 @@ export type Stack = {
 export const fetchStacks = async () => {
   let data;
 
-  if (import.meta.env.DEV) {
-    data = await axiosInstance.post(
-      `v1/databases/${import.meta.env.VITE_NOTION_DATABASE_STACK}/query`
+  if (import.meta.env.DEV || process.env.DEV) {
+    data = (
+      await axiosInstance.post(
+        `v1/databases/${import.meta.env.VITE_NOTION_DATABASE_STACK}/query`
+      )
     ).data;
   } else {
     data = (await axiosInstance.post("api/notion")).data.data;
