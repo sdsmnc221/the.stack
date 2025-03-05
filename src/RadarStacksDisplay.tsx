@@ -28,7 +28,7 @@ export const fetchStacks = async () => {
   const { data } = await axiosInstance.post(
     import.meta.env.DEV
       ? `v1/databases/${import.meta.env.VITE_NOTION_DATABASE_STACK}/query`
-      : "api/"
+      : "api/notion"
   );
 
   const { results: pages } = data;
