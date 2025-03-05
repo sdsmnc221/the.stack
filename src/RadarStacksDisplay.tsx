@@ -16,26 +16,19 @@ export type Stack = {
 };
 
 export const fetchStacks = async () => {
-  // // Initializing a client
-  // const notion = new Client({
-  //   auth: import.meta.env.VITE_NOTION_API_KEY,
-  // });
+  let data;
 
-  // notion.databases.query({
-  //   database_id: import.meta.env.VITE_NOTION_DATABASE_STACK,
-  // });
-
-  const { data } = await axiosInstance.post(
-    import.meta.env.DEV
-      ? `v1/databases/${import.meta.env.VITE_NOTION_DATABASE_STACK}/query`
-      : "api/notion"
-  );
+  if (import.meta.env.DEV) {
+    data = await axiosInstance.post(
+      `v1/databases/${import.meta.env.VITE_NOTION_DATABASE_STACK}/query`
+    ).data;
+  } else {
+    data = await axiosInstance.post("api/notion");
+  }
 
   const { results: pages } = data;
 
   if (pages.length) {
-    // console.log(pages);
-
     const stacksCategories: string[] = pages.reduce(
       (acc: string[], page: any) => {
         if (page?.properties?.Domaine?.rich_text?.length) {
