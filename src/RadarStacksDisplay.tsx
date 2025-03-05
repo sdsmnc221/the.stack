@@ -1,6 +1,7 @@
 // @ts-nocheck
 
 import { useState, useEffect } from "react";
+// import { Client } from "@notionhq/client";
 import RadarStack from "./RadarStack";
 import axiosInstance from "./axiosInstance";
 import axios from "axios";
@@ -26,6 +27,8 @@ export const fetchStacks = async () => {
   //   database_id: import.meta.env.VITE_NOTION_DATABASE_STACK,
   // });
 
+  // console.log(notion);
+
   const notionApiBaseUrl = "https://api.notion.com";
   const endpoint = `v1/databases/${process.env.VITE_NOTION_DATABASE_STACK}/query`;
 
@@ -33,11 +36,7 @@ export const fetchStacks = async () => {
     ? await axiosInstance.post(
         `v1/databases/${import.meta.env.VITE_NOTION_DATABASE_STACK}/query`
       )
-    : axios.get(`${notionApiBaseUrl}/${endpoint}`, {
-        headers: {
-          Authorization: `Bearer ${import.meta.env.VITE_NOTION_API_KEY}`,
-        },
-      });
+    : axios.get(`/api/notion`);
 
   const { results: pages } = data;
 

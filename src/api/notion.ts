@@ -36,10 +36,9 @@ export default async function handler(
         "Access-Control-Allow-Headers":
           "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
       },
-      body: JSON.stringify(request.body),
     });
 
-    const data = await fetchResponse.json();
+    const data = await fetchResponse;
 
     // Return the data in the response
     return response.status(200).json({
