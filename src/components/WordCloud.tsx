@@ -60,7 +60,7 @@ export default function WordCloud({ width, height }: WordCloudProps) {
       range: [10, 72],
     });
 
-    return scale(value) * width < height ? 0.5 : 1;
+    return width < height ? scale(value) / 2 : scale(value);
   };
 
   const fontSizeSetter = (datum: WordData) => fontScale(datum.value);
@@ -110,7 +110,7 @@ export default function WordCloud({ width, height }: WordCloudProps) {
       {!loading && (
         <Wordcloud
           words={words}
-          width={width}
+          width={width < height ? width * 2 : width}
           height={height}
           fontSize={fontSizeSetter}
           font={"Varela Round"}

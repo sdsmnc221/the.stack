@@ -171,7 +171,7 @@ export default function RadarStacksDisplay({
         {currentStack?.length && (
           <div key={currentStack}>
             <RadarStack
-              width={width}
+              width={width < height ? width * 2 : width}
               height={height}
               data={stacksByCategory[currentStack].map((skill) => ({
                 name: skill.name,
