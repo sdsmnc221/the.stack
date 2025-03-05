@@ -1,7 +1,4 @@
-import { useEffect } from "react";
 import Lottie from "lottie-react";
-
-import axios from "axios";
 
 import "./App.scss";
 
