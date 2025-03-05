@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: process.env.DEV
+  baseURL: import.meta.env.DEV
     ? import.meta.env.VITE_BASE_URL
     : "/api" + import.meta.env.VITE_BASE_URL_VERCEL,
   headers: {
