@@ -1,0 +1,44 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap");
+
+.app {
+  width: 90vw;
+  height: 90dvh;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  background-color: transparent;
+}
+
+.flower svg {
+  position: absolute;
+  left: 50%;
+  top: -16vh;
+  transform: scale(0.72) translateX(-50%) !important;
+  transform-origin: left;
+}
+
+.wordcloud {
+  display: flex;
+  flex-direction: column;
+  user-select: none;
+  transform: scale(0.48);
+  transform-origin: bottom;
+}
+.wordcloud svg {
+  margin: 1rem 0;
+  cursor: pointer;
+}
+
+.wordcloud label {
+  display: inline-flex;
+  align-items: center;
+  font-size: 14px;
+  margin-right: 8px;
+}
+.wordcloud textarea {
+  min-height: 100px;
+}

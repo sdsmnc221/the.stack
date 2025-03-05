@@ -2,18 +2,18 @@ import React, { useState, useEffect } from "react";
 import RadarStack from "./RadarStack";
 import axiosInstance from "./axiosInstance";
 
-type StackSkill = {
+export type StackSkill = {
   category: string;
   name: string;
   progress: number;
   total: number;
 };
 
-type Stack = {
+export type Stack = {
   [key: string]: StackSkill;
 };
 
-const fetchStacks = async () => {
+export const fetchStacks = async () => {
   // // Initializing a client
   // const notion = new Client({
   //   auth: import.meta.env.VITE_NOTION_API_KEY,
@@ -32,7 +32,7 @@ const fetchStacks = async () => {
   const { results: pages } = data;
 
   if (pages.length) {
-    console.log(pages);
+    // console.log(pages);
 
     const stacksCategories: string[] = pages.reduce(
       (acc: string[], page: any) => {
@@ -51,6 +51,10 @@ const fetchStacks = async () => {
     const stacksSkills: StackSkill[] = pages.reduce(
       (acc: StackSkill[], page: any) => {
         let currentSkill: any = {};
+
+        if (page?.properties["Is Legacy Skill"].checkbox) {
+          return acc;
+        }
 
         if (page?.properties?.Domaine?.rich_text?.length) {
           const { plain_text: category } = page.properties.Domaine.rich_text[0];
@@ -107,6 +111,7 @@ const fetchStacks = async () => {
     return {
       stacksCategories: stacksCategories,
       allCategories,
+      skills: stacksSkills,
     };
   }
 };
@@ -149,7 +154,7 @@ export default function RadarStacksDisplay({
     return <div>Loading...</div>;
   }
 
-  console.log(stacksByCategory[currentStack]);
+  // console.log(stacksByCategory[currentStack]);
 
   return (
     <>
